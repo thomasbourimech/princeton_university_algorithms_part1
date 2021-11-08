@@ -19,14 +19,17 @@ public class Percolation {
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n){
         size = n;
-        if (n <= 0) throw new IllegalArgumentException("n is either negative or equal to 0.");
+        if (n <= 0) throw new IllegalArgumentException("n is either negative or "
+                                                               + "equal to 0.");
         grid = new boolean[n][n];
         top_index = 0;
         bottom_index = n * n + 1;
         quickUFind = new WeightedQuickUnionUF(n * n + 2);
+
         open(1,1);
-        open(1,2);
-        open( 2, 1);
+        open( 1,2);
+        open( 2,2);
+        open( 4, 4);
         prt();
     }
 
@@ -44,7 +47,8 @@ public class Percolation {
 
             //if on first row ... is connected to top
             if (row == 1) {
-                System.out.println("Unifying index " + qf_index + " and " + top_index);
+                System.out.println("Unifying index " + qf_index + " and "
+                                           + top_index);
                 this.quickUFind.union(qf_index, top_index);
             }
             //if on last row ... is connected to bottom
@@ -54,9 +58,30 @@ public class Percolation {
             }
             //if up is open
             if (row > 1 && isOpen(row-1, col)){
-                int qf_up_index = (row - 2) * size + col;
+                int qf_up_index = qf_index - size;
                 System.out.println("Unifying index " + qf_index + " and " + qf_up_index);
                 this.quickUFind.union(qf_index, qf_up_index);
+            }
+            //if left is open
+            if (col > 1 && isOpen(row, col-1)){
+                //int qf_left_index = row * size - col - 1  ;
+                int qf_left_index = qf_index - 1  ;
+                System.out.println("Unifying index " + qf_index + " and " + qf_left_index);
+                this.quickUFind.union(qf_index, qf_left_index);
+            }
+
+            //if right is open
+            if (col < size && isOpen(row , col+1)){
+                int qf_right_index = qf_index + 1;
+                System.out.println("Unifying index " + qf_index + " and " + qf_right_index);
+                this.quickUFind.union(qf_index, qf_right_index);
+            }
+
+            //if down is open
+            if (row < size && isOpen(row+1 , col)){
+                int qf_down_index = qf_index + size;
+                System.out.println("Unifying index " + qf_index + " and " + qf_down_index);
+                this.quickUFind.union(qf_index, qf_down_index);
             }
         }
 
