@@ -36,7 +36,7 @@ public class Percolation {
     // opens the site (row, col) if it is not open already
     public void open(int row, int col){
         if (row < 1 || col < 1 || row > size || col > size){
-            throw new IllegalArgumentException("row or col out of boundaries");
+            throw new IllegalArgumentException("row or col is out of boundaries");
         }
         if (this.isOpen(row, col)){
             return;
