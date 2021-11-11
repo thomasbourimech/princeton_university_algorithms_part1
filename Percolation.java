@@ -27,17 +27,6 @@ public class Percolation {
         bottom_index = n * n + 1;
         WeightedQuickUFind = new WeightedQuickUnionUF(n * n + 2);
 
-        // open(1,1);
-        // open( 1,2);
-        // open( 2, 2);
-        // open( 2, 3);
-        // open( 3, 3);
-        // open(4,3);
-        // System.out.println(isFull(4,3));
-        // System.out.println(percolates());
-        // prt();
-
-
     }
 
     // opens the site (row, col) if it is not open already
@@ -54,40 +43,40 @@ public class Percolation {
 
             //if on first row ... is connected to top
             if (row == 1) {
-                System.out.println("Unifying index " + qf_index + " and "
-                                           + top_index);
+                //System.out.println("Unifying index " + qf_index + " and "
+                //                           + top_index);
                 this.WeightedQuickUFind.union(qf_index, top_index);
             }
             //if on last row ... is connected to bottom
             if (row == size) {
-                System.out.println("Unifying index " + qf_index + " and " + bottom_index);
+                //System.out.println("Unifying index " + qf_index + " and " + bottom_index);
                 this.WeightedQuickUFind.union(qf_index, bottom_index);
             }
             //if up is open
             if (row > 1 && isOpen(row-1, col)){
                 int qf_up_index = qf_index - size;
-                System.out.println("Unifying index " + qf_index + " and " + qf_up_index);
+                //System.out.println("Unifying index " + qf_index + " and " + qf_up_index);
                 this.WeightedQuickUFind.union(qf_index, qf_up_index);
             }
             //if left is open
             if (col > 1 && isOpen(row, col-1)){
                 //int qf_left_index = row * size - col - 1  ;
                 int qf_left_index = qf_index - 1  ;
-                System.out.println("Unifying index " + qf_index + " and " + qf_left_index);
+                //System.out.println("Unifying index " + qf_index + " and " + qf_left_index);
                 this.WeightedQuickUFind.union(qf_index, qf_left_index);
             }
 
             //if right is open
             if (col < size && isOpen(row , col+1)){
                 int qf_right_index = qf_index + 1;
-                System.out.println("Unifying index " + qf_index + " and " + qf_right_index);
+                //System.out.println("Unifying index " + qf_index + " and " + qf_right_index);
                 this.WeightedQuickUFind.union(qf_index, qf_right_index);
             }
 
             //if down is open
             if (row < size && isOpen(row+1 , col)){
                 int qf_down_index = qf_index + size;
-                System.out.println("Unifying index " + qf_index + " and " + qf_down_index);
+                //System.out.println("Unifying index " + qf_index + " and " + qf_down_index);
                 this.WeightedQuickUFind.union(qf_index, qf_down_index);
             }
         }
@@ -123,7 +112,7 @@ public class Percolation {
 
     }
 
-    private void prt(){
+    public void prt(){
         for (int i=0; i<=this.size-1; i++){
             for (int j=0; j<=this.size-1; j++){
                 System.out.print(this.grid[i][j]+"\t");
