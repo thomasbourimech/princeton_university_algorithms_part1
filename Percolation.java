@@ -34,9 +34,7 @@ public class Percolation {
         if (row < 1 || col < 1 || row > size || col > size){
             throw new IllegalArgumentException("row or col is out of boundaries");
         }
-        if (this.isOpen(row, col)){
-            return;
-        }else {
+        if (!this.isOpen(row, col)){
             grid[row - 1][col - 1] = true;
             open_counter++;
             int qf_index = (row - 1) * size + col;
@@ -112,15 +110,7 @@ public class Percolation {
 
     }
 
-    public void prt(){
-        for (int i=0; i<=this.size-1; i++){
-            for (int j=0; j<=this.size-1; j++){
-                System.out.print(this.grid[i][j]+"\t");
-            }
-            System.out.println();
-        }
 
-    }
 }
 
 
